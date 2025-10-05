@@ -1,0 +1,5 @@
+{"test_pixel-level F1": 0.004725117471486388, "test_image-level F1": 0.8617291450500488, "epoch": 0}
+{"test_pixel-level F1": 0.00019228359413698867, "test_image-level F1": 0.7748191952705383, "epoch": 0}
+{"test_pixel-level F1": 0.0, "test_image-level F1": 0.8533296585083008, "epoch": 10}
+{"test_pixel-level F1": 0.0, "test_image-level F1": 0.853644847869873, "epoch": 20}
+{"test_pixel-level F1": 0.0, "test_image-level F1": 0.0, "epoch": 30}

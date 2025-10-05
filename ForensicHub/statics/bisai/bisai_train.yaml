@@ -1,0 +1,56 @@
+accum_iter: 1
+batch_size: 16
+blr: 0.001
+checkpoint_path: ./log/bisai1
+device: cuda
+dist_on_itp: false
+dist_url: env://
+epochs: 100
+evaluator:
+- name: ImageF1
+- init_config:
+    threshold: 0.5
+  name: PixelF1
+find_unused_parameters: true
+flag: train
+gpus: 0,1
+if_predict_label: true
+if_predict_mask: true
+local_rank: -1
+log_dir: ./log/bisai1
+log_per_epoch_count: 20
+lr: 1e-4
+min_lr: 1e-5
+model:
+  name: BisaiBaseline
+no_model_eval: false
+num_workers: 12
+pin_mem: true
+record_epoch: 1
+resume: ""
+seed: 42
+start_epoch: 0
+test_batch_size: 32
+test_dataset:
+- dataset_name: val
+  init_config:
+    image_size: 512
+    path: /data/disk2/yer/Dataset/train/val_split.csv
+    root_dir: /data/disk2/yer/Dataset/train
+  name: BisaiDataset
+test_period: 1000
+train_dataset:
+  dataset_name: train
+  init_config:
+    image_size: 512
+    path: /data/disk2/yer/Dataset/train/train_split.csv
+    root_dir: /data/disk2/yer/Dataset/train
+  name: BisaiDataset
+transform:
+  init_config:
+    norm_type: image_net
+  name: BisaiTransform
+use_amp: true
+warmup_epochs: 1
+weight_decay: 0.05
+world_size: 1

@@ -1,0 +1,32 @@
+checkpoint_path: /data/disk2/yer/ForensicHub/ForensicHub/statics/log/bisai1
+device: cuda
+dist_on_itp: false
+dist_url: env://
+evaluator:
+- name: ImageF1
+- init_config:
+    threshold: 0.5
+  name: PixelF1
+flag: test
+gpus: 0,1
+if_predict_label: true
+if_predict_mask: true
+log_dir: ./log/bisai1
+model:
+  name: BisaiBaseline
+no_model_eval: false
+num_workers: 12
+pin_mem: true
+resume: ./log/bisai1/checkpoint-0.pth
+test_batch_size: 64
+test_dataset:
+- dataset_name: bisaiset
+  init_config:
+    image_size: 512
+    path: /data/disk2/yer/Dataset/train/val_split.csv
+    root_dir: /data/disk2/yer/Dataset/train
+  name: BisaiDataset
+transform:
+  init_config:
+    norm_type: image_net
+  name: BisaiTransform

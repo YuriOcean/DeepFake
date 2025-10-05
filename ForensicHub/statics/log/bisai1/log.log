@@ -1,0 +1,2256 @@
+1.9.0+cu111
+Current Torch version: 1.9
+1.9.0+cu111
+Current Torch version: 1.9
+| distributed init (rank 0): env://, gpu 0
+1.9.0+cu111
+Current Torch version: 1.9
+1.9.0+cu111
+Current Torch version: 1.9
+| distributed init (rank 1): env://, gpu 1
+[13:08:01.113036] job dir: /data/disk2/yer/ForensicHub/ForensicHub/training_scripts
+[13:08:01.113104] =====args:=====
+[13:08:01.113166] Namespace(checkpoint_path='/data/disk2/yer/ForensicHub/ForensicHub/statics/log/bisai1',
+device='cuda',
+dist_backend='nccl',
+dist_on_itp=False,
+dist_url='env://',
+distributed=True,
+flag='test',
+gpu=0,
+gpus='0,1',
+if_predict_label=True,
+if_predict_mask=True,
+log_dir='./log/bisai1',
+no_model_eval=False,
+num_workers=12,
+output_dir='./log/bisai1',
+pin_mem=True,
+rank=0,
+resume='./log/bisai1/checkpoint-13.pth',
+test_batch_size=10,
+world_size=2)
+[13:08:01.113220] [build_from_registry] Creating model 'BisaiTransform' with args: {'norm_type': 'image_net'}
+[13:08:01.113617] Test transform:  Compose([
+], p=1.0, bbox_params=None, keypoint_params=None, additional_targets={})
+[13:08:01.113683] Post transform:  Compose([
+  Normalize(always_apply=False, p=1.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
+  ToTensorV2(always_apply=True, p=1.0, transpose_mask=True),
+], p=1.0, bbox_params=None, keypoint_params=None, additional_targets={})
+[13:08:01.113778] [build_from_registry] Creating model 'focal' with args: {}
+[13:08:02.040996] [build_from_registry] Creating model 'ImageF1' with args: {}
+[13:08:02.041122] [build_from_registry] Creating model 'PixelF1' with args: {'threshold': 0.5}
+[13:08:02.041156] Evaluators: [<IMDLBenCo.evaluation.F1.ImageF1 object at 0x7f90b19081c0>, <IMDLBenCo.evaluation.F1.PixelF1 object at 0x7f90b19081f0>]
+[13:08:02.155899] Model = BisaiFOCAL(
+  (backbone): FocalBackboneWrapper(
+    (enc): FOCAL_HRNet(
+      (net): HRNet(
+        (conv1): Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (layer1): Sequential(
+          (0): Bottleneck(
+            (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+            (downsample): Sequential(
+              (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+              (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            )
+          )
+          (1): Bottleneck(
+            (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+          (2): Bottleneck(
+            (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+          (3): Bottleneck(
+            (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (bn3): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU(inplace=True)
+          )
+        )
+        (transition1): ModuleList(
+          (0): Sequential(
+            (0): Conv2d(256, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (1): Sequential(
+            (0): Sequential(
+              (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+              (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU(inplace=True)
+            )
+          )
+        )
+        (stage2): Sequential(
+          (0): HighResolutionModule(
+            (branches): ModuleList(
+              (0): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (1): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+            )
+            (fuse_layers): ModuleList(
+              (0): ModuleList(
+                (0): None
+                (1): Sequential(
+                  (0): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+              )
+              (1): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): None
+              )
+            )
+            (relu): ReLU(inplace=True)
+          )
+        )
+        (transition2): ModuleList(
+          (0): None
+          (1): None
+          (2): Sequential(
+            (0): Sequential(
+              (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+              (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU(inplace=True)
+            )
+          )
+        )
+        (stage3): Sequential(
+          (0): HighResolutionModule(
+            (branches): ModuleList(
+              (0): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (1): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (2): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+            )
+            (fuse_layers): ModuleList(
+              (0): ModuleList(
+                (0): None
+                (1): Sequential(
+                  (0): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+                (2): Sequential(
+                  (0): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=4.0, mode=nearest)
+                )
+              )
+              (1): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): None
+                (2): Sequential(
+                  (0): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+              )
+              (2): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                    (2): ReLU(inplace=True)
+                  )
+                  (1): Sequential(
+                    (0): Conv2d(32, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (2): None
+              )
+            )
+            (relu): ReLU(inplace=True)
+          )
+          (1): HighResolutionModule(
+            (branches): ModuleList(
+              (0): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (1): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (2): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+            )
+            (fuse_layers): ModuleList(
+              (0): ModuleList(
+                (0): None
+                (1): Sequential(
+                  (0): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+                (2): Sequential(
+                  (0): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=4.0, mode=nearest)
+                )
+              )
+              (1): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): None
+                (2): Sequential(
+                  (0): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+              )
+              (2): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                    (2): ReLU(inplace=True)
+                  )
+                  (1): Sequential(
+                    (0): Conv2d(32, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (2): None
+              )
+            )
+            (relu): ReLU(inplace=True)
+          )
+          (2): HighResolutionModule(
+            (branches): ModuleList(
+              (0): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (1): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (2): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+            )
+            (fuse_layers): ModuleList(
+              (0): ModuleList(
+                (0): None
+                (1): Sequential(
+                  (0): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+                (2): Sequential(
+                  (0): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=4.0, mode=nearest)
+                )
+              )
+              (1): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): None
+                (2): Sequential(
+                  (0): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+              )
+              (2): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                    (2): ReLU(inplace=True)
+                  )
+                  (1): Sequential(
+                    (0): Conv2d(32, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (2): None
+              )
+            )
+            (relu): ReLU(inplace=True)
+          )
+          (3): HighResolutionModule(
+            (branches): ModuleList(
+              (0): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (1): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (2): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+            )
+            (fuse_layers): ModuleList(
+              (0): ModuleList(
+                (0): None
+                (1): Sequential(
+                  (0): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+                (2): Sequential(
+                  (0): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=4.0, mode=nearest)
+                )
+              )
+              (1): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): None
+                (2): Sequential(
+                  (0): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+              )
+              (2): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                    (2): ReLU(inplace=True)
+                  )
+                  (1): Sequential(
+                    (0): Conv2d(32, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (2): None
+              )
+            )
+            (relu): ReLU(inplace=True)
+          )
+        )
+        (transition3): ModuleList(
+          (0): None
+          (1): None
+          (2): None
+          (3): Sequential(
+            (0): Sequential(
+              (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+              (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU(inplace=True)
+            )
+          )
+        )
+        (stage4): Sequential(
+          (0): HighResolutionModule(
+            (branches): ModuleList(
+              (0): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (1): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (2): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (3): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+            )
+            (fuse_layers): ModuleList(
+              (0): ModuleList(
+                (0): None
+                (1): Sequential(
+                  (0): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+                (2): Sequential(
+                  (0): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=4.0, mode=nearest)
+                )
+                (3): Sequential(
+                  (0): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=8.0, mode=nearest)
+                )
+              )
+              (1): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): None
+                (2): Sequential(
+                  (0): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+                (3): Sequential(
+                  (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=4.0, mode=nearest)
+                )
+              )
+              (2): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                    (2): ReLU(inplace=True)
+                  )
+                  (1): Sequential(
+                    (0): Conv2d(32, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (2): None
+                (3): Sequential(
+                  (0): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+              )
+              (3): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                    (2): ReLU(inplace=True)
+                  )
+                  (1): Sequential(
+                    (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                    (2): ReLU(inplace=True)
+                  )
+                  (2): Sequential(
+                    (0): Conv2d(32, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                    (2): ReLU(inplace=True)
+                  )
+                  (1): Sequential(
+                    (0): Conv2d(64, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (2): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (3): None
+              )
+            )
+            (relu): ReLU(inplace=True)
+          )
+          (1): HighResolutionModule(
+            (branches): ModuleList(
+              (0): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (1): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (2): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (3): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+            )
+            (fuse_layers): ModuleList(
+              (0): ModuleList(
+                (0): None
+                (1): Sequential(
+                  (0): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+                (2): Sequential(
+                  (0): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=4.0, mode=nearest)
+                )
+                (3): Sequential(
+                  (0): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=8.0, mode=nearest)
+                )
+              )
+              (1): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): None
+                (2): Sequential(
+                  (0): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+                (3): Sequential(
+                  (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=4.0, mode=nearest)
+                )
+              )
+              (2): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                    (2): ReLU(inplace=True)
+                  )
+                  (1): Sequential(
+                    (0): Conv2d(32, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (2): None
+                (3): Sequential(
+                  (0): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+              )
+              (3): ModuleList(
+                (0): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                    (2): ReLU(inplace=True)
+                  )
+                  (1): Sequential(
+                    (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                    (2): ReLU(inplace=True)
+                  )
+                  (2): Sequential(
+                    (0): Conv2d(32, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (1): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                    (2): ReLU(inplace=True)
+                  )
+                  (1): Sequential(
+                    (0): Conv2d(64, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (2): Sequential(
+                  (0): Sequential(
+                    (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                    (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  )
+                )
+                (3): None
+              )
+            )
+            (relu): ReLU(inplace=True)
+          )
+          (2): HighResolutionModule(
+            (branches): ModuleList(
+              (0): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (1): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (2): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+              (3): Sequential(
+                (0): BasicBlock(
+                  (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (1): BasicBlock(
+                  (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (2): BasicBlock(
+                  (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+                (3): BasicBlock(
+                  (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (relu): ReLU(inplace=True)
+                  (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                )
+              )
+            )
+            (fuse_layers): ModuleList(
+              (0): ModuleList(
+                (0): None
+                (1): Sequential(
+                  (0): Conv2d(64, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=2.0, mode=nearest)
+                )
+                (2): Sequential(
+                  (0): Conv2d(128, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=4.0, mode=nearest)
+                )
+                (3): Sequential(
+                  (0): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (2): Upsample(scale_factor=8.0, mode=nearest)
+                )
+              )
+            )
+            (relu): ReLU(inplace=True)
+          )
+        )
+        (final_layer): Conv2d(32, 17, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+  )
+  (local_head): UpsampleLocalHead(
+    (conv1): Conv2d(32, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn1): SyncBatchNorm(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU(inplace=True)
+    (out_conv): Conv2d(16, 1, kernel_size=(1, 1), stride=(1, 1))
+  )
+  (detect_head): DetectHead(
+    (pool_avg): AdaptiveAvgPool2d(output_size=1)
+    (pool_max): AdaptiveMaxPool2d(output_size=1)
+    (mlp): Sequential(
+      (0): Linear(in_features=64, out_features=256, bias=True)
+      (1): ReLU(inplace=True)
+      (2): Linear(in_features=256, out_features=1, bias=True)
+    )
+  )
+)
+[13:08:02.267937] Post function check: focal_post_func
+[13:08:02.268002] None
+[13:08:02.268243] [build_from_registry] Creating model 'CoverageDataset' with args: {'image_size': 512, 'include_original': True, 'mask_type': 'forged', 'root_dir': '/data/disk2/yer/Dataset/forgery/Coverage', 'post_funcs': None, 'common_transform': Compose([
+], p=1.0, bbox_params=None, keypoint_params=None, additional_targets={}), 'post_transform': Compose([
+  Normalize(always_apply=False, p=1.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
+  ToTensorV2(always_apply=True, p=1.0, transpose_mask=True),
+], p=1.0, bbox_params=None, keypoint_params=None, additional_targets={})}
+[13:08:02.270195] [build_from_registry] Creating model 'ColumbiaDataset' with args: {'image_size': 512, 'include_original': True, 'root_dir': '/data/disk2/yer/Dataset/forgery/Columbia', 'post_funcs': None, 'common_transform': Compose([
+], p=1.0, bbox_params=None, keypoint_params=None, additional_targets={}), 'post_transform': Compose([
+  Normalize(always_apply=False, p=1.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
+  ToTensorV2(always_apply=True, p=1.0, transpose_mask=True),
+], p=1.0, bbox_params=None, keypoint_params=None, additional_targets={})}
+[13:08:02.279797] [build_from_registry] Creating model 'UADFVDataset' with args: {'bbox_expand': 1.3, 'crop_by_landmarks': True, 'frames_per_video': 8, 'image_size': 512, 'include_fake': True, 'include_real': True, 'root_dir': '/data/disk2/yer/Dataset/forgery/UADFV/UADFVset', 'sampling': 'uniform', 'post_funcs': None, 'common_transform': Compose([
+], p=1.0, bbox_params=None, keypoint_params=None, additional_targets={}), 'post_transform': Compose([
+  Normalize(always_apply=False, p=1.0, mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0),
+  ToTensorV2(always_apply=True, p=1.0, transpose_mask=True),
+], p=1.0, bbox_params=None, keypoint_params=None, additional_targets={})}
+[13:08:02.321590] Test dataset: coverage
+[CoverageDataset] at /data/disk2/yer/Dataset/forgery/Coverage, with length of 200
+
+[13:08:02.321630] Test dataset: columbia
+[ColumbiaDataset] at /data/disk2/yer/Dataset/forgery/Columbia, with length of 363
+
+[13:08:02.321651] Test dataset: uadfv
+[UADFVDataset] at /data/disk2/yer/Dataset/forgery/UADFV/UADFVset, with length of 784
+
+[13:08:02.323859] Sampler_test = <torch.utils.data.distributed.DistributedSampler object at 0x7f90b19089d0>
+[13:08:02.325123] Sampler_test = <torch.utils.data.distributed.DistributedSampler object at 0x7f90664b5100>
+[13:08:02.326192] Sampler_test = <torch.utils.data.distributed.DistributedSampler object at 0x7f90664b57f0>
+[13:08:02.326333] dataset_dict {'coverage': <torch.utils.data.dataloader.DataLoader object at 0x7f90b1908a00>, 'columbia': <torch.utils.data.dataloader.DataLoader object at 0x7f90664b5130>, 'uadfv': <torch.utils.data.dataloader.DataLoader object at 0x7f90664b5820>}
+[13:08:02.326394] ['events.out.tfevents.1758979936.haida-KI4208G.26540.0', 'checkpoint-4.pth', 'checkpoint-9.pth', 'coverage', 'temp', 'checkpoint-11.pth', 'checkpoint-1.pth', 'checkpoint-8.pth', 'error.log', 'checkpoint-0.pth', 'checkpoint-10.pth', 'checkpoint-3.pth', 'checkpoint-13.pth', 'val', 'checkpoint-5.pth', 'uadfv', 'checkpoint-2.pth', 'checkpoint-12.pth', 'columbia', 'log.log', 'checkpoint-6.pth', 'checkpoint-7.pth', 'log.txt']
+[13:08:02.326443] Loading checkpoint: checkpoint-0.pth
+[13:08:03.118925] Testing on dataset: coverage
+[13:08:05.935425] Test: [0]  [ 0/10]  eta: 0:00:28  pixel-level F1: [local: 0.0461 | reduced: 0.0461]  time: 2.8098  data: 2.5614  max mem: 1125
+[13:08:06.972709] Test: [0]  [ 9/10]  eta: 0:00:00  pixel-level F1: [local: 0.0030 | reduced: 0.0170]  time: 0.3847  data: 0.2562  max mem: 1185
+[13:08:07.106370] Test: [0] Total time: 0:00:03 (0.3981 s / it)
+[13:08:07.270819] ---syncronized---
+[13:08:07.270860] image-level F1 reduced_count 2
+[13:08:07.270884] image-level F1 reduced_sum 1.0940171480178833
+[13:08:07.270908] pixel-level F1 reduced_count 200
+[13:08:07.270926] pixel-level F1 reduced_sum 1.7044000222813338
+[13:08:07.270946] ---syncronized done ---
+[13:08:10.508503] Averaged stats: pixel-level F1: [local: 0.0030 | reduced: 0.0085]  image-level F1: [local: 0.5470 | reduced: 0.5470]
+[13:08:10.518647] Testing on dataset: columbia
+[13:08:11.832973] Test: [0]  [ 0/18]  eta: 0:00:23  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.3028  data: 1.1390  max mem: 1185
+[13:08:13.985980] Test: [0]  [17/18]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1919  data: 0.0671  max mem: 1185
+[13:08:14.214511] Test: [0] Total time: 0:00:03 (0.2048 s / it)
+[13:08:14.214652] ***************************************************************
+[13:08:14.214675] ****An extra tail dataset should exist for accracy metrics!****
+[13:08:14.214694] ***************************************************************
+[13:08:14.214717] **** Length of tail: 3 ****
+[13:08:14.364668] ====================
+[13:08:14.364732] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 3: The default batch size is 10
+[13:08:14.364747] ====================
+[13:08:14.365305] Actual Batchsize/ world_size {'_n': 1.5}
+[13:08:14.365369] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:08:14.366535] Test <remaining>: [0]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1508  data: 0.0913  max mem: 1185
+[13:08:14.366630] Test <remaining>: [0] Total time: 0:00:00 (0.1513 s / it)
+[13:08:14.368548] ---syncronized---
+[13:08:14.368581] image-level F1 reduced_count 2
+[13:08:14.368602] image-level F1 reduced_sum 1.2507374286651611
+[13:08:14.368624] pixel-level F1 reduced_count 363
+[13:08:14.368642] pixel-level F1 reduced_sum 0.0
+[13:08:14.368661] ---syncronized done ---
+[13:08:17.769079] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.6254 | reduced: 0.6254]
+[13:08:17.777621] Testing on dataset: uadfv
+[13:08:19.887176] Test: [0]  [ 0/39]  eta: 0:01:21  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 2.1010  data: 1.9369  max mem: 1185
+[13:08:22.485109] Test: [0]  [20/39]  eta: 0:00:04  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1298  data: 0.0006  max mem: 1185
+[13:08:24.553588] Test: [0]  [38/39]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1149  data: 0.0001  max mem: 1185
+[13:08:24.733767] Test: [0] Total time: 0:00:06 (0.1782 s / it)
+[13:08:24.733884] ***************************************************************
+[13:08:24.733901] ****An extra tail dataset should exist for accracy metrics!****
+[13:08:24.733914] ***************************************************************
+[13:08:24.733930] **** Length of tail: 4 ****
+[13:08:24.865212] ====================
+[13:08:24.865288] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 4: The default batch size is 10
+[13:08:24.865304] ====================
+[13:08:24.865836] Actual Batchsize/ world_size {'_n': 2.0}
+[13:08:24.865904] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:08:24.873050] Test <remaining>: [0]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1385  data: 0.0723  max mem: 1185
+[13:08:24.873142] Test <remaining>: [0] Total time: 0:00:00 (0.1389 s / it)
+[13:08:24.874581] ---syncronized---
+[13:08:24.874615] image-level F1 reduced_count 2
+[13:08:24.874639] image-level F1 reduced_sum 0.0
+[13:08:24.874661] pixel-level F1 reduced_count 784
+[13:08:24.874682] pixel-level F1 reduced_sum 0.0
+[13:08:24.874702] ---syncronized done ---
+[13:08:27.500689] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.0000 | reduced: 0.0000]
+[13:08:27.506518] Testing on ckpt checkpoint-0.pth takes 0:00:25
+[13:08:27.506545] Loading checkpoint: checkpoint-1.pth
+[13:08:28.375280] Testing on dataset: coverage
+[13:08:29.795066] Test: [1]  [ 0/10]  eta: 0:00:14  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.4131  data: 1.2964  max mem: 1185
+[13:08:30.830594] Test: [1]  [ 9/10]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.2448  data: 0.1297  max mem: 1185
+[13:08:31.005636] Test: [1] Total time: 0:00:02 (0.2624 s / it)
+[13:08:31.007500] ---syncronized---
+[13:08:31.007538] image-level F1 reduced_count 2
+[13:08:31.007563] image-level F1 reduced_sum 1.3244147300720215
+[13:08:31.007586] pixel-level F1 reduced_count 200
+[13:08:31.007605] pixel-level F1 reduced_sum 0.0
+[13:08:31.007624] ---syncronized done ---
+[13:08:33.971764] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.6622 | reduced: 0.6622]
+[13:08:33.982974] Testing on dataset: columbia
+[13:08:35.541780] Test: [1]  [ 0/18]  eta: 0:00:27  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.5507  data: 1.3901  max mem: 1185
+[13:08:37.569722] Test: [1]  [17/18]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1988  data: 0.0801  max mem: 1185
+[13:08:37.765792] Test: [1] Total time: 0:00:03 (0.2098 s / it)
+[13:08:37.765987] ***************************************************************
+[13:08:37.766031] ****An extra tail dataset should exist for accracy metrics!****
+[13:08:37.766069] ***************************************************************
+[13:08:37.766112] **** Length of tail: 3 ****
+[13:08:37.895193] ====================
+[13:08:37.895263] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 3: The default batch size is 10
+[13:08:37.895278] ====================
+[13:08:37.895944] Actual Batchsize/ world_size {'_n': 1.5}
+[13:08:37.896017] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:08:37.896992] Test <remaining>: [1]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1300  data: 0.0682  max mem: 1185
+[13:08:37.897092] Test <remaining>: [1] Total time: 0:00:00 (0.1305 s / it)
+[13:08:37.898718] ---syncronized---
+[13:08:37.898753] image-level F1 reduced_count 2
+[13:08:37.898777] image-level F1 reduced_sum 1.401574730873108
+[13:08:37.898800] pixel-level F1 reduced_count 363
+[13:08:37.898820] pixel-level F1 reduced_sum 0.0
+[13:08:37.898840] ---syncronized done ---
+[13:08:41.126040] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.7008 | reduced: 0.7008]
+[13:08:41.132696] Testing on dataset: uadfv
+[13:08:43.049201] Test: [1]  [ 0/39]  eta: 0:01:14  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.9085  data: 1.7364  max mem: 1185
+[13:08:45.381048] Test: [1]  [20/39]  eta: 0:00:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1165  data: 0.0001  max mem: 1185
+[13:08:47.459103] Test: [1]  [38/39]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1154  data: 0.0001  max mem: 1185
+[13:08:47.655846] Test: [1] Total time: 0:00:06 (0.1671 s / it)
+[13:08:47.656089] ***************************************************************
+[13:08:47.656133] ****An extra tail dataset should exist for accracy metrics!****
+[13:08:47.656166] ***************************************************************
+[13:08:47.656206] **** Length of tail: 4 ****
+[13:08:47.785678] ====================
+[13:08:47.785745] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 4: The default batch size is 10
+[13:08:47.785760] ====================
+[13:08:47.786318] Actual Batchsize/ world_size {'_n': 2.0}
+[13:08:47.786384] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:08:47.798976] Test <remaining>: [1]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1418  data: 0.0753  max mem: 1185
+[13:08:47.799068] Test <remaining>: [1] Total time: 0:00:00 (0.1423 s / it)
+[13:08:47.800652] ---syncronized---
+[13:08:47.800686] image-level F1 reduced_count 2
+[13:08:47.800708] image-level F1 reduced_sum 0.763076901435852
+[13:08:47.800730] pixel-level F1 reduced_count 784
+[13:08:47.800749] pixel-level F1 reduced_sum 0.0
+[13:08:47.800767] ---syncronized done ---
+[13:08:50.470028] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.3815 | reduced: 0.3815]
+[13:08:50.475900] Testing on ckpt checkpoint-1.pth takes 0:00:48
+[13:08:50.475939] Loading checkpoint: checkpoint-2.pth
+[13:08:51.238881] Testing on dataset: coverage
+[13:08:52.607852] Test: [2]  [ 0/10]  eta: 0:00:13  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.3626  data: 1.2446  max mem: 1185
+[13:08:53.646511] Test: [2]  [ 9/10]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0053]  time: 0.2401  data: 0.1245  max mem: 1185
+[13:08:53.815967] Test: [2] Total time: 0:00:02 (0.2571 s / it)
+[13:08:53.820065] ---syncronized---
+[13:08:53.820152] image-level F1 reduced_count 2
+[13:08:53.820223] image-level F1 reduced_sum 1.3244147300720215
+[13:08:53.820292] pixel-level F1 reduced_count 200
+[13:08:53.820353] pixel-level F1 reduced_sum 0.5306468605995178
+[13:08:53.820417] ---syncronized done ---
+[13:08:56.776193] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0027]  image-level F1: [local: 0.6622 | reduced: 0.6622]
+[13:08:56.786465] Testing on dataset: columbia
+[13:08:58.607233] Test: [2]  [ 0/18]  eta: 0:00:32  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.8117  data: 1.6934  max mem: 1185
+[13:09:00.568211] Test: [2]  [17/18]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.2096  data: 0.0941  max mem: 1185
+[13:09:00.771754] Test: [2] Total time: 0:00:03 (0.2209 s / it)
+[13:09:00.771962] ***************************************************************
+[13:09:00.772010] ****An extra tail dataset should exist for accracy metrics!****
+[13:09:00.772045] ***************************************************************
+[13:09:00.772085] **** Length of tail: 3 ****
+[13:09:00.895568] ====================
+[13:09:00.895634] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 3: The default batch size is 10
+[13:09:00.895649] ====================
+[13:09:00.896188] Actual Batchsize/ world_size {'_n': 1.5}
+[13:09:00.896256] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:09:00.897227] Test <remaining>: [2]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1242  data: 0.0708  max mem: 1185
+[13:09:00.897321] Test <remaining>: [2] Total time: 0:00:00 (0.1247 s / it)
+[13:09:00.898808] ---syncronized---
+[13:09:00.898842] image-level F1 reduced_count 2
+[13:09:00.898866] image-level F1 reduced_sum 1.475890874862671
+[13:09:00.898889] pixel-level F1 reduced_count 363
+[13:09:00.898910] pixel-level F1 reduced_sum 0.0
+[13:09:00.898930] ---syncronized done ---
+[13:09:04.003012] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.7379 | reduced: 0.7379]
+[13:09:04.011640] Testing on dataset: uadfv
+[13:09:05.982676] Test: [2]  [ 0/39]  eta: 0:01:16  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.9628  data: 1.8350  max mem: 1185
+[13:09:08.325611] Test: [2]  [20/39]  eta: 0:00:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1171  data: 0.0002  max mem: 1185
+[13:09:10.402245] Test: [2]  [38/39]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1153  data: 0.0001  max mem: 1185
+[13:09:10.617591] Test: [2] Total time: 0:00:06 (0.1692 s / it)
+[13:09:10.617717] ***************************************************************
+[13:09:10.617745] ****An extra tail dataset should exist for accracy metrics!****
+[13:09:10.617770] ***************************************************************
+[13:09:10.617798] **** Length of tail: 4 ****
+[13:09:10.749922] ====================
+[13:09:10.749996] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 4: The default batch size is 10
+[13:09:10.750023] ====================
+[13:09:10.750721] Actual Batchsize/ world_size {'_n': 2.0}
+[13:09:10.750797] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:09:10.755482] Test <remaining>: [2]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1369  data: 0.0701  max mem: 1185
+[13:09:10.755589] Test <remaining>: [2] Total time: 0:00:00 (0.1374 s / it)
+[13:09:10.757326] ---syncronized---
+[13:09:10.757362] image-level F1 reduced_count 2
+[13:09:10.757385] image-level F1 reduced_sum 0.4140625
+[13:09:10.757410] pixel-level F1 reduced_count 784
+[13:09:10.757430] pixel-level F1 reduced_sum 0.0
+[13:09:10.757451] ---syncronized done ---
+[13:09:13.396539] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.2070 | reduced: 0.2070]
+[13:09:13.401594] Testing on ckpt checkpoint-2.pth takes 0:01:11
+[13:09:13.401626] Loading checkpoint: checkpoint-3.pth
+[13:09:14.215145] Testing on dataset: coverage
+[13:09:15.649679] Test: [3]  [ 0/10]  eta: 0:00:14  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.4280  data: 1.3105  max mem: 1185
+[13:09:16.689085] Test: [3]  [ 9/10]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.2467  data: 0.1311  max mem: 1185
+[13:09:16.854458] Test: [3] Total time: 0:00:02 (0.2633 s / it)
+[13:09:16.856153] ---syncronized---
+[13:09:16.856193] image-level F1 reduced_count 2
+[13:09:16.856218] image-level F1 reduced_sum 1.3333333730697632
+[13:09:16.856241] pixel-level F1 reduced_count 200
+[13:09:16.856260] pixel-level F1 reduced_sum 0.0
+[13:09:16.856279] ---syncronized done ---
+[13:09:19.749320] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.6667 | reduced: 0.6667]
+[13:09:19.760984] Testing on dataset: columbia
+[13:09:21.158155] Test: [3]  [ 0/18]  eta: 0:00:24  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.3819  data: 1.2128  max mem: 1185
+[13:09:23.389216] Test: [3]  [17/18]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.2007  data: 0.0817  max mem: 1185
+[13:09:23.609186] Test: [3] Total time: 0:00:03 (0.2130 s / it)
+[13:09:23.609371] ***************************************************************
+[13:09:23.609411] ****An extra tail dataset should exist for accracy metrics!****
+[13:09:23.609445] ***************************************************************
+[13:09:23.609482] **** Length of tail: 3 ****
+[13:09:23.732721] ====================
+[13:09:23.732785] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 3: The default batch size is 10
+[13:09:23.732799] ====================
+[13:09:23.733310] Actual Batchsize/ world_size {'_n': 1.5}
+[13:09:23.733373] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:09:23.734250] Test <remaining>: [3]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1239  data: 0.0708  max mem: 1185
+[13:09:23.734342] Test <remaining>: [3] Total time: 0:00:00 (0.1244 s / it)
+[13:09:23.735698] ---syncronized---
+[13:09:23.735730] image-level F1 reduced_count 2
+[13:09:23.735752] image-level F1 reduced_sum 1.4485597610473633
+[13:09:23.735774] pixel-level F1 reduced_count 363
+[13:09:23.735792] pixel-level F1 reduced_sum 0.0
+[13:09:23.735811] ---syncronized done ---
+[13:09:26.857688] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.7243 | reduced: 0.7243]
+[13:09:26.863983] Testing on dataset: uadfv
+[13:09:28.753449] Test: [3]  [ 0/39]  eta: 0:01:13  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.8816  data: 1.5774  max mem: 1185
+[13:09:31.107428] Test: [3]  [20/39]  eta: 0:00:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1176  data: 0.0002  max mem: 1185
+[13:09:33.187437] Test: [3]  [38/39]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1155  data: 0.0001  max mem: 1185
+[13:09:33.383764] Test: [3] Total time: 0:00:06 (0.1670 s / it)
+[13:09:33.383946] ***************************************************************
+[13:09:33.383982] ****An extra tail dataset should exist for accracy metrics!****
+[13:09:33.384008] ***************************************************************
+[13:09:33.384039] **** Length of tail: 4 ****
+[13:09:33.517867] ====================
+[13:09:33.517943] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 4: The default batch size is 10
+[13:09:33.517959] ====================
+[13:09:33.518663] Actual Batchsize/ world_size {'_n': 2.0}
+[13:09:33.518743] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:09:33.523316] Test <remaining>: [3]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1384  data: 0.0720  max mem: 1185
+[13:09:33.523418] Test <remaining>: [3] Total time: 0:00:00 (0.1390 s / it)
+[13:09:33.525173] ---syncronized---
+[13:09:33.525210] image-level F1 reduced_count 2
+[13:09:33.525234] image-level F1 reduced_sum 0.8971428275108337
+[13:09:33.525259] pixel-level F1 reduced_count 784
+[13:09:33.525279] pixel-level F1 reduced_sum 0.0
+[13:09:33.525299] ---syncronized done ---
+[13:09:36.049895] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.4486 | reduced: 0.4486]
+[13:09:36.056361] Testing on ckpt checkpoint-3.pth takes 0:01:33
+[13:09:36.056392] Loading checkpoint: checkpoint-4.pth
+[13:09:36.880448] Testing on dataset: coverage
+[13:09:38.302328] Test: [4]  [ 0/10]  eta: 0:00:14  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.4150  data: 1.2967  max mem: 1185
+[13:09:39.342007] Test: [4]  [ 9/10]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0016]  time: 0.2454  data: 0.1297  max mem: 1185
+[13:09:39.546917] Test: [4] Total time: 0:00:02 (0.2660 s / it)
+[13:09:39.550594] ---syncronized---
+[13:09:39.550680] image-level F1 reduced_count 2
+[13:09:39.550741] image-level F1 reduced_sum 1.3288135528564453
+[13:09:39.550802] pixel-level F1 reduced_count 200
+[13:09:39.550852] pixel-level F1 reduced_sum 0.15731020271778107
+[13:09:39.550907] ---syncronized done ---
+[13:09:42.435628] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0008]  image-level F1: [local: 0.6644 | reduced: 0.6644]
+[13:09:42.443844] Testing on dataset: columbia
+[13:09:44.245453] Test: [4]  [ 0/18]  eta: 0:00:32  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.7924  data: 1.6606  max mem: 1185
+[13:09:46.223594] Test: [4]  [17/18]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.2094  data: 0.0923  max mem: 1185
+[13:09:46.381099] Test: [4] Total time: 0:00:03 (0.2183 s / it)
+[13:09:46.381200] ***************************************************************
+[13:09:46.381216] ****An extra tail dataset should exist for accracy metrics!****
+[13:09:46.381228] ***************************************************************
+[13:09:46.381243] **** Length of tail: 3 ****
+[13:09:46.496320] ====================
+[13:09:46.496384] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 3: The default batch size is 10
+[13:09:46.496399] ====================
+[13:09:46.496923] Actual Batchsize/ world_size {'_n': 1.5}
+[13:09:46.496988] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:09:46.497927] Test <remaining>: [4]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1160  data: 0.0620  max mem: 1185
+[13:09:46.498019] Test <remaining>: [4] Total time: 0:00:00 (0.1165 s / it)
+[13:09:46.499400] ---syncronized---
+[13:09:46.499433] image-level F1 reduced_count 2
+[13:09:46.499455] image-level F1 reduced_sum 1.451546311378479
+[13:09:46.499477] pixel-level F1 reduced_count 363
+[13:09:46.499496] pixel-level F1 reduced_sum 0.0
+[13:09:46.499514] ---syncronized done ---
+[13:09:49.625050] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.7258 | reduced: 0.7258]
+[13:09:49.633681] Testing on dataset: uadfv
+[13:09:51.355239] Test: [4]  [ 0/39]  eta: 0:01:06  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.7136  data: 1.5903  max mem: 1185
+[13:09:53.703920] Test: [4]  [20/39]  eta: 0:00:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1174  data: 0.0002  max mem: 1185
+[13:09:55.784516] Test: [4]  [38/39]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1156  data: 0.0001  max mem: 1185
+[13:09:55.993367] Test: [4] Total time: 0:00:06 (0.1629 s / it)
+[13:09:55.993454] ***************************************************************
+[13:09:55.993469] ****An extra tail dataset should exist for accracy metrics!****
+[13:09:55.993481] ***************************************************************
+[13:09:55.993495] **** Length of tail: 4 ****
+[13:09:56.116920] ====================
+[13:09:56.116997] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 4: The default batch size is 10
+[13:09:56.117011] ====================
+[13:09:56.117563] Actual Batchsize/ world_size {'_n': 2.0}
+[13:09:56.117630] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:09:56.131026] Test <remaining>: [4]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1368  data: 0.0703  max mem: 1185
+[13:09:56.131115] Test <remaining>: [4] Total time: 0:00:00 (0.1374 s / it)
+[13:09:56.132591] ---syncronized---
+[13:09:56.132624] image-level F1 reduced_count 2
+[13:09:56.132646] image-level F1 reduced_sum 0.6112053990364075
+[13:09:56.132669] pixel-level F1 reduced_count 784
+[13:09:56.132687] pixel-level F1 reduced_sum 0.0
+[13:09:56.132706] ---syncronized done ---
+[13:09:58.637054] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.3056 | reduced: 0.3056]
+[13:09:58.642396] Testing on ckpt checkpoint-4.pth takes 0:01:56
+[13:09:58.642425] Loading checkpoint: checkpoint-5.pth
+[13:09:59.390944] Testing on dataset: coverage
+[13:10:00.858728] Test: [5]  [ 0/10]  eta: 0:00:14  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.4612  data: 1.3424  max mem: 1185
+[13:10:01.899459] Test: [5]  [ 9/10]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0009]  time: 0.2501  data: 0.1343  max mem: 1185
+[13:10:02.073394] Test: [5] Total time: 0:00:02 (0.2676 s / it)
+[13:10:02.075336] ---syncronized---
+[13:10:02.075378] image-level F1 reduced_count 2
+[13:10:02.075407] image-level F1 reduced_sum 1.3288590908050537
+[13:10:02.075434] pixel-level F1 reduced_count 200
+[13:10:02.075456] pixel-level F1 reduced_sum 0.09278634190559387
+[13:10:02.075480] ---syncronized done ---
+[13:10:05.024604] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0005]  image-level F1: [local: 0.6644 | reduced: 0.6644]
+[13:10:05.036122] Testing on dataset: columbia
+[13:10:06.643367] Test: [5]  [ 0/18]  eta: 0:00:28  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.5972  data: 1.4749  max mem: 1185
+[13:10:08.611006] Test: [5]  [17/18]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1980  data: 0.0820  max mem: 1185
+[13:10:08.806159] Test: [5] Total time: 0:00:03 (0.2089 s / it)
+[13:10:08.806324] ***************************************************************
+[13:10:08.806367] ****An extra tail dataset should exist for accracy metrics!****
+[13:10:08.806401] ***************************************************************
+[13:10:08.806441] **** Length of tail: 3 ****
+[13:10:08.923694] ====================
+[13:10:08.923760] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 3: The default batch size is 10
+[13:10:08.923774] ====================
+[13:10:08.924301] Actual Batchsize/ world_size {'_n': 1.5}
+[13:10:08.924372] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:10:08.925271] Test <remaining>: [5]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1179  data: 0.0641  max mem: 1185
+[13:10:08.925364] Test <remaining>: [5] Total time: 0:00:00 (0.1184 s / it)
+[13:10:08.926820] ---syncronized---
+[13:10:08.926855] image-level F1 reduced_count 2
+[13:10:08.926887] image-level F1 reduced_sum 1.4245471954345703
+[13:10:08.926909] pixel-level F1 reduced_count 363
+[13:10:08.926928] pixel-level F1 reduced_sum 0.0
+[13:10:08.926946] ---syncronized done ---
+[13:10:12.031401] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.7123 | reduced: 0.7123]
+[13:10:12.038621] Testing on dataset: uadfv
+[13:10:14.056469] Test: [5]  [ 0/39]  eta: 0:01:18  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 2.0073  data: 1.8884  max mem: 1185
+[13:10:16.410979] Test: [5]  [20/39]  eta: 0:00:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1177  data: 0.0002  max mem: 1185
+[13:10:18.489203] Test: [5]  [38/39]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1154  data: 0.0001  max mem: 1185
+[13:10:18.706505] Test: [5] Total time: 0:00:06 (0.1707 s / it)
+[13:10:18.706624] ***************************************************************
+[13:10:18.706651] ****An extra tail dataset should exist for accracy metrics!****
+[13:10:18.706672] ***************************************************************
+[13:10:18.706698] **** Length of tail: 4 ****
+[13:10:18.828667] ====================
+[13:10:18.828742] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 4: The default batch size is 10
+[13:10:18.828756] ====================
+[13:10:18.829293] Actual Batchsize/ world_size {'_n': 2.0}
+[13:10:18.829363] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:10:18.842349] Test <remaining>: [5]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1349  data: 0.0690  max mem: 1185
+[13:10:18.842441] Test <remaining>: [5] Total time: 0:00:00 (0.1354 s / it)
+[13:10:18.843976] ---syncronized---
+[13:10:18.844009] image-level F1 reduced_count 2
+[13:10:18.844030] image-level F1 reduced_sum 1.0
+[13:10:18.844051] pixel-level F1 reduced_count 784
+[13:10:18.844069] pixel-level F1 reduced_sum 0.0
+[13:10:18.844088] ---syncronized done ---
+[13:10:21.374978] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.5000 | reduced: 0.5000]
+[13:10:21.382048] Testing on ckpt checkpoint-5.pth takes 0:02:19
+[13:10:21.382075] Loading checkpoint: checkpoint-6.pth
+[13:10:22.256822] Testing on dataset: coverage
+[13:10:23.745544] Test: [6]  [ 0/10]  eta: 0:00:14  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.4822  data: 1.3649  max mem: 1185
+[13:10:24.786302] Test: [6]  [ 9/10]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0005]  time: 0.2522  data: 0.1365  max mem: 1185
+[13:10:24.974268] Test: [6] Total time: 0:00:02 (0.2712 s / it)
+[13:10:24.977617] ---syncronized---
+[13:10:24.977700] image-level F1 reduced_count 2
+[13:10:24.977761] image-level F1 reduced_sum 1.3288590908050537
+[13:10:24.977821] pixel-level F1 reduced_count 200
+[13:10:24.977871] pixel-level F1 reduced_sum 0.052498847246170044
+[13:10:24.977924] ---syncronized done ---
+[13:10:27.878680] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0003]  image-level F1: [local: 0.6644 | reduced: 0.6644]
+[13:10:27.890518] Testing on dataset: columbia
+[13:10:29.261112] Test: [6]  [ 0/18]  eta: 0:00:24  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.3615  data: 1.1723  max mem: 1185
+[13:10:31.314599] Test: [6]  [17/18]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1897  data: 0.0691  max mem: 1185
+[13:10:31.516518] Test: [6] Total time: 0:00:03 (0.2010 s / it)
+[13:10:31.516633] ***************************************************************
+[13:10:31.516656] ****An extra tail dataset should exist for accracy metrics!****
+[13:10:31.516675] ***************************************************************
+[13:10:31.516698] **** Length of tail: 3 ****
+[13:10:31.634367] ====================
+[13:10:31.634432] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 3: The default batch size is 10
+[13:10:31.634446] ====================
+[13:10:31.634963] Actual Batchsize/ world_size {'_n': 1.5}
+[13:10:31.635037] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:10:31.635965] Test <remaining>: [6]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1185  data: 0.0656  max mem: 1185
+[13:10:31.636056] Test <remaining>: [6] Total time: 0:00:00 (0.1190 s / it)
+[13:10:31.637475] ---syncronized---
+[13:10:31.637507] image-level F1 reduced_count 2
+[13:10:31.637528] image-level F1 reduced_sum 1.4279917478561401
+[13:10:31.637550] pixel-level F1 reduced_count 363
+[13:10:31.637569] pixel-level F1 reduced_sum 0.0
+[13:10:31.637588] ---syncronized done ---
+[13:10:34.744830] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.7140 | reduced: 0.7140]
+[13:10:34.752329] Testing on dataset: uadfv
+[13:10:36.745803] Test: [6]  [ 0/39]  eta: 0:01:17  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.9855  data: 1.8661  max mem: 1185
+[13:10:39.094213] Test: [6]  [20/39]  eta: 0:00:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1174  data: 0.0006  max mem: 1185
+[13:10:41.174909] Test: [6]  [38/39]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1156  data: 0.0001  max mem: 1185
+[13:10:41.370331] Test: [6] Total time: 0:00:06 (0.1695 s / it)
+[13:10:41.370490] ***************************************************************
+[13:10:41.370531] ****An extra tail dataset should exist for accracy metrics!****
+[13:10:41.370564] ***************************************************************
+[13:10:41.370601] **** Length of tail: 4 ****
+[13:10:41.493915] ====================
+[13:10:41.493989] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 4: The default batch size is 10
+[13:10:41.494003] ====================
+[13:10:41.494574] Actual Batchsize/ world_size {'_n': 2.0}
+[13:10:41.494645] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:10:41.507595] Test <remaining>: [6]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1361  data: 0.0699  max mem: 1185
+[13:10:41.507686] Test <remaining>: [6] Total time: 0:00:00 (0.1366 s / it)
+[13:10:41.509145] ---syncronized---
+[13:10:41.509178] image-level F1 reduced_count 2
+[13:10:41.509199] image-level F1 reduced_sum 0.8833333253860474
+[13:10:41.509222] pixel-level F1 reduced_count 784
+[13:10:41.509241] pixel-level F1 reduced_sum 0.0
+[13:10:41.509259] ---syncronized done ---
+[13:10:43.990460] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.4417 | reduced: 0.4417]
+[13:10:43.995463] Testing on ckpt checkpoint-6.pth takes 0:02:41
+[13:10:43.995490] Loading checkpoint: checkpoint-7.pth
+[13:10:44.752795] Testing on dataset: coverage
+[13:10:46.105493] Test: [7]  [ 0/10]  eta: 0:00:13  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.3458  data: 1.2291  max mem: 1185
+[13:10:47.145654] Test: [7]  [ 9/10]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.2385  data: 0.1230  max mem: 1185
+[13:10:47.339085] Test: [7] Total time: 0:00:02 (0.2580 s / it)
+[13:10:47.340794] ---syncronized---
+[13:10:47.340832] image-level F1 reduced_count 2
+[13:10:47.340856] image-level F1 reduced_sum 1.3333333730697632
+[13:10:47.340879] pixel-level F1 reduced_count 200
+[13:10:47.340897] pixel-level F1 reduced_sum 0.0
+[13:10:47.340916] ---syncronized done ---
+[13:10:50.224803] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.6667 | reduced: 0.6667]
+[13:10:50.232639] Testing on dataset: columbia
+[13:10:51.819898] Test: [7]  [ 0/18]  eta: 0:00:28  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.5748  data: 1.4052  max mem: 1185
+[13:10:53.810669] Test: [7]  [17/18]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1980  data: 0.0792  max mem: 1185
+[13:10:54.022662] Test: [7] Total time: 0:00:03 (0.2099 s / it)
+[13:10:54.022750] ***************************************************************
+[13:10:54.022766] ****An extra tail dataset should exist for accracy metrics!****
+[13:10:54.022785] ***************************************************************
+[13:10:54.022799] **** Length of tail: 3 ****
+[13:10:54.135766] ====================
+[13:10:54.135828] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 3: The default batch size is 10
+[13:10:54.135842] ====================
+[13:10:54.136361] Actual Batchsize/ world_size {'_n': 1.5}
+[13:10:54.136425] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:10:54.137281] Test <remaining>: [7]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1139  data: 0.0610  max mem: 1185
+[13:10:54.137374] Test <remaining>: [7] Total time: 0:00:00 (0.1143 s / it)
+[13:10:54.138742] ---syncronized---
+[13:10:54.138774] image-level F1 reduced_count 2
+[13:10:54.138796] image-level F1 reduced_sum 1.4367345571517944
+[13:10:54.138817] pixel-level F1 reduced_count 363
+[13:10:54.138836] pixel-level F1 reduced_sum 0.0
+[13:10:54.138854] ---syncronized done ---
+[13:10:57.233492] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.7184 | reduced: 0.7184]
+[13:10:57.238508] Testing on dataset: uadfv
+[13:10:58.872392] Test: [7]  [ 0/39]  eta: 0:01:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.6261  data: 1.3048  max mem: 1185
+[13:11:01.251249] Test: [7]  [20/39]  eta: 0:00:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1189  data: 0.0002  max mem: 1185
+[13:11:03.331333] Test: [7]  [38/39]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1155  data: 0.0001  max mem: 1185
+[13:11:03.531822] Test: [7] Total time: 0:00:06 (0.1612 s / it)
+[13:11:03.531991] ***************************************************************
+[13:11:03.532033] ****An extra tail dataset should exist for accracy metrics!****
+[13:11:03.532064] ***************************************************************
+[13:11:03.532101] **** Length of tail: 4 ****
+[13:11:03.657785] ====================
+[13:11:03.657860] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 4: The default batch size is 10
+[13:11:03.657875] ====================
+[13:11:03.658434] Actual Batchsize/ world_size {'_n': 2.0}
+[13:11:03.658507] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:11:03.671943] Test <remaining>: [7]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1389  data: 0.0723  max mem: 1185
+[13:11:03.672037] Test <remaining>: [7] Total time: 0:00:00 (0.1394 s / it)
+[13:11:03.673495] ---syncronized---
+[13:11:03.673529] image-level F1 reduced_count 2
+[13:11:03.673553] image-level F1 reduced_sum 0.974700391292572
+[13:11:03.673577] pixel-level F1 reduced_count 784
+[13:11:03.673598] pixel-level F1 reduced_sum 0.0
+[13:11:03.673619] ---syncronized done ---
+[13:11:06.172714] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.4874 | reduced: 0.4874]
+[13:11:06.176305] Testing on ckpt checkpoint-7.pth takes 0:03:03
+[13:11:06.176332] Loading checkpoint: checkpoint-8.pth
+[13:11:06.927659] Testing on dataset: coverage
+[13:11:08.294131] Test: [8]  [ 0/10]  eta: 0:00:13  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.3596  data: 1.2398  max mem: 1185
+[13:11:09.336201] Test: [8]  [ 9/10]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.2401  data: 0.1240  max mem: 1185
+[13:11:09.503167] Test: [8] Total time: 0:00:02 (0.2569 s / it)
+[13:11:09.506530] ---syncronized---
+[13:11:09.506601] image-level F1 reduced_count 2
+[13:11:09.506657] image-level F1 reduced_sum 1.3244147300720215
+[13:11:09.506710] pixel-level F1 reduced_count 200
+[13:11:09.506755] pixel-level F1 reduced_sum 0.0
+[13:11:09.506802] ---syncronized done ---
+[13:11:12.360958] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.6622 | reduced: 0.6622]
+[13:11:12.369356] Testing on dataset: columbia
+[13:11:14.027665] Test: [8]  [ 0/18]  eta: 0:00:29  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.6493  data: 1.4862  max mem: 1185
+[13:11:15.994156] Test: [8]  [17/18]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.2008  data: 0.0826  max mem: 1185
+[13:11:16.171064] Test: [8] Total time: 0:00:03 (0.2107 s / it)
+[13:11:16.171167] ***************************************************************
+[13:11:16.171183] ****An extra tail dataset should exist for accracy metrics!****
+[13:11:16.171197] ***************************************************************
+[13:11:16.171213] **** Length of tail: 3 ****
+[13:11:16.290995] ====================
+[13:11:16.291062] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 3: The default batch size is 10
+[13:11:16.291077] ====================
+[13:11:16.291724] Actual Batchsize/ world_size {'_n': 1.5}
+[13:11:16.291791] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:11:16.292742] Test <remaining>: [8]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1209  data: 0.0594  max mem: 1185
+[13:11:16.292843] Test <remaining>: [8] Total time: 0:00:00 (0.1214 s / it)
+[13:11:16.294480] ---syncronized---
+[13:11:16.294514] image-level F1 reduced_count 2
+[13:11:16.294537] image-level F1 reduced_sum 1.4367345571517944
+[13:11:16.294561] pixel-level F1 reduced_count 363
+[13:11:16.294581] pixel-level F1 reduced_sum 0.0
+[13:11:16.294601] ---syncronized done ---
+[13:11:19.363347] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.7184 | reduced: 0.7184]
+[13:11:19.371975] Testing on dataset: uadfv
+[13:11:21.366038] Test: [8]  [ 0/39]  eta: 0:01:17  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.9841  data: 1.8653  max mem: 1185
+[13:11:23.728258] Test: [8]  [20/39]  eta: 0:00:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1181  data: 0.0002  max mem: 1185
+[13:11:25.810124] Test: [8]  [38/39]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1156  data: 0.0001  max mem: 1185
+[13:11:26.033326] Test: [8] Total time: 0:00:06 (0.1706 s / it)
+[13:11:26.033443] ***************************************************************
+[13:11:26.033466] ****An extra tail dataset should exist for accracy metrics!****
+[13:11:26.033485] ***************************************************************
+[13:11:26.033507] **** Length of tail: 4 ****
+[13:11:26.148401] ====================
+[13:11:26.148477] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 4: The default batch size is 10
+[13:11:26.148491] ====================
+[13:11:26.149043] Actual Batchsize/ world_size {'_n': 2.0}
+[13:11:26.149111] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:11:26.162371] Test <remaining>: [8]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1281  data: 0.0616  max mem: 1185
+[13:11:26.162461] Test <remaining>: [8] Total time: 0:00:00 (0.1286 s / it)
+[13:11:26.164137] ---syncronized---
+[13:11:26.164169] image-level F1 reduced_count 2
+[13:11:26.164191] image-level F1 reduced_sum 0.7095761895179749
+[13:11:26.164214] pixel-level F1 reduced_count 784
+[13:11:26.164232] pixel-level F1 reduced_sum 0.0
+[13:11:26.164250] ---syncronized done ---
+[13:11:28.699720] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.3548 | reduced: 0.3548]
+[13:11:28.706295] Testing on ckpt checkpoint-8.pth takes 0:03:26
+[13:11:28.706322] Loading checkpoint: checkpoint-9.pth
+[13:11:29.470696] Testing on dataset: coverage
+[13:11:30.757269] Test: [9]  [ 0/10]  eta: 0:00:12  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.2794  data: 1.1609  max mem: 1185
+[13:11:31.798272] Test: [9]  [ 9/10]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.2320  data: 0.1161  max mem: 1185
+[13:11:31.983022] Test: [9] Total time: 0:00:02 (0.2506 s / it)
+[13:11:31.984755] ---syncronized---
+[13:11:31.984794] image-level F1 reduced_count 2
+[13:11:31.984818] image-level F1 reduced_sum 1.3422819375991821
+[13:11:31.984847] pixel-level F1 reduced_count 200
+[13:11:31.984866] pixel-level F1 reduced_sum 0.0
+[13:11:31.984885] ---syncronized done ---
+[13:11:34.868042] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.6711 | reduced: 0.6711]
+[13:11:34.875658] Testing on dataset: columbia
+[13:11:36.324591] Test: [9]  [ 0/18]  eta: 0:00:25  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.4401  data: 1.2706  max mem: 1185
+[13:11:38.593205] Test: [9]  [17/18]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.2060  data: 0.0857  max mem: 1185
+[13:11:38.806042] Test: [9] Total time: 0:00:03 (0.2180 s / it)
+[13:11:38.806209] ***************************************************************
+[13:11:38.806251] ****An extra tail dataset should exist for accracy metrics!****
+[13:11:38.806285] ***************************************************************
+[13:11:38.806325] **** Length of tail: 3 ****
+[13:11:38.921315] ====================
+[13:11:38.921379] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 3: The default batch size is 10
+[13:11:38.921394] ====================
+[13:11:38.921918] Actual Batchsize/ world_size {'_n': 1.5}
+[13:11:38.921984] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:11:38.922871] Test <remaining>: [9]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1156  data: 0.0624  max mem: 1185
+[13:11:38.922964] Test <remaining>: [9] Total time: 0:00:00 (0.1161 s / it)
+[13:11:38.924372] ---syncronized---
+[13:11:38.924407] image-level F1 reduced_count 2
+[13:11:38.924430] image-level F1 reduced_sum 1.4060606956481934
+[13:11:38.924454] pixel-level F1 reduced_count 363
+[13:11:38.924474] pixel-level F1 reduced_sum 0.0
+[13:11:38.924495] ---syncronized done ---
+[13:11:41.998559] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.7030 | reduced: 0.7030]
+[13:11:42.006297] Testing on dataset: uadfv
+[13:11:43.647515] Test: [9]  [ 0/39]  eta: 0:01:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.6324  data: 1.4395  max mem: 1185
+[13:11:46.103657] Test: [9]  [20/39]  eta: 0:00:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1228  data: 0.0060  max mem: 1185
+[13:11:48.183095] Test: [9]  [38/39]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1155  data: 0.0001  max mem: 1185
+[13:11:48.392099] Test: [9] Total time: 0:00:06 (0.1635 s / it)
+[13:11:48.392207] ***************************************************************
+[13:11:48.392229] ****An extra tail dataset should exist for accracy metrics!****
+[13:11:48.392248] ***************************************************************
+[13:11:48.392271] **** Length of tail: 4 ****
+[13:11:48.515254] ====================
+[13:11:48.515328] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 4: The default batch size is 10
+[13:11:48.515343] ====================
+[13:11:48.515896] Actual Batchsize/ world_size {'_n': 2.0}
+[13:11:48.515980] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:11:48.529208] Test <remaining>: [9]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1362  data: 0.0694  max mem: 1185
+[13:11:48.529299] Test <remaining>: [9] Total time: 0:00:00 (0.1367 s / it)
+[13:11:48.530757] ---syncronized---
+[13:11:48.530792] image-level F1 reduced_count 2
+[13:11:48.530815] image-level F1 reduced_sum 1.1258907318115234
+[13:11:48.530840] pixel-level F1 reduced_count 784
+[13:11:48.530861] pixel-level F1 reduced_sum 0.0
+[13:11:48.530881] ---syncronized done ---
+[13:11:50.953325] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.5629 | reduced: 0.5629]
+[13:11:50.960970] Testing on ckpt checkpoint-9.pth takes 0:03:48
+[13:11:50.961002] Loading checkpoint: checkpoint-10.pth
+[13:11:51.840092] Testing on dataset: coverage
+[13:11:53.146816] Test: [10]  [ 0/10]  eta: 0:00:12  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.2994  data: 1.1786  max mem: 1185
+[13:11:54.188354] Test: [10]  [ 9/10]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0002]  time: 0.2340  data: 0.1179  max mem: 1185
+[13:11:54.372526] Test: [10] Total time: 0:00:02 (0.2526 s / it)
+[13:11:54.374187] ---syncronized---
+[13:11:54.374226] image-level F1 reduced_count 2
+[13:11:54.374250] image-level F1 reduced_sum 1.3288590908050537
+[13:11:54.374273] pixel-level F1 reduced_count 200
+[13:11:54.374292] pixel-level F1 reduced_sum 0.022206898778676987
+[13:11:54.374312] ---syncronized done ---
+[13:11:57.287128] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0001]  image-level F1: [local: 0.6644 | reduced: 0.6644]
+[13:11:57.296868] Testing on dataset: columbia
+[13:11:58.774046] Test: [10]  [ 0/18]  eta: 0:00:26  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.4688  data: 1.3091  max mem: 1185
+[13:12:00.795314] Test: [10]  [17/18]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1939  data: 0.0754  max mem: 1185
+[13:12:00.956651] Test: [10] Total time: 0:00:03 (0.2029 s / it)
+[13:12:00.956738] ***************************************************************
+[13:12:00.956752] ****An extra tail dataset should exist for accracy metrics!****
+[13:12:00.956765] ***************************************************************
+[13:12:00.956780] **** Length of tail: 3 ****
+[13:12:01.072952] ====================
+[13:12:01.073017] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 3: The default batch size is 10
+[13:12:01.073031] ====================
+[13:12:01.073543] Actual Batchsize/ world_size {'_n': 1.5}
+[13:12:01.073608] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:12:01.074459] Test <remaining>: [10]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1171  data: 0.0642  max mem: 1185
+[13:12:01.074547] Test <remaining>: [10] Total time: 0:00:00 (0.1175 s / it)
+[13:12:01.075904] ---syncronized---
+[13:12:01.075945] image-level F1 reduced_count 2
+[13:12:01.075966] image-level F1 reduced_sum 1.4122447967529297
+[13:12:01.075988] pixel-level F1 reduced_count 363
+[13:12:01.076007] pixel-level F1 reduced_sum 0.0
+[13:12:01.076026] ---syncronized done ---
+[13:12:04.168812] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.7061 | reduced: 0.7061]
+[13:12:04.176010] Testing on dataset: uadfv
+[13:12:06.215848] Test: [10]  [ 0/39]  eta: 0:01:19  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 2.0319  data: 1.9118  max mem: 1185
+[13:12:08.576632] Test: [10]  [20/39]  eta: 0:00:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1180  data: 0.0002  max mem: 1185
+[13:12:10.658983] Test: [10]  [38/39]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1156  data: 0.0001  max mem: 1185
+[13:12:10.856468] Test: [10] Total time: 0:00:06 (0.1711 s / it)
+[13:12:10.856623] ***************************************************************
+[13:12:10.856662] ****An extra tail dataset should exist for accracy metrics!****
+[13:12:10.856694] ***************************************************************
+[13:12:10.856730] **** Length of tail: 4 ****
+[13:12:10.980439] ====================
+[13:12:10.980510] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 4: The default batch size is 10
+[13:12:10.980523] ====================
+[13:12:10.981069] Actual Batchsize/ world_size {'_n': 2.0}
+[13:12:10.981138] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:12:10.994344] Test <remaining>: [10]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1367  data: 0.0702  max mem: 1185
+[13:12:10.994437] Test <remaining>: [10] Total time: 0:00:00 (0.1372 s / it)
+[13:12:10.995948] ---syncronized---
+[13:12:10.995981] image-level F1 reduced_count 2
+[13:12:10.996002] image-level F1 reduced_sum 0.9680110812187195
+[13:12:10.996025] pixel-level F1 reduced_count 784
+[13:12:10.996060] pixel-level F1 reduced_sum 0.0
+[13:12:10.996079] ---syncronized done ---
+[13:12:13.499590] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.4840 | reduced: 0.4840]
+[13:12:13.508111] Testing on ckpt checkpoint-10.pth takes 0:04:11
+[13:12:13.508143] Loading checkpoint: checkpoint-11.pth
+[13:12:14.261717] Testing on dataset: coverage
+[13:12:15.656860] Test: [11]  [ 0/10]  eta: 0:00:13  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.3887  data: 1.2715  max mem: 1185
+[13:12:16.698558] Test: [11]  [ 9/10]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.2430  data: 0.1272  max mem: 1185
+[13:12:16.875249] Test: [11] Total time: 0:00:02 (0.2608 s / it)
+[13:12:16.877281] ---syncronized---
+[13:12:16.877322] image-level F1 reduced_count 2
+[13:12:16.877348] image-level F1 reduced_sum 1.3333333730697632
+[13:12:16.877373] pixel-level F1 reduced_count 200
+[13:12:16.877394] pixel-level F1 reduced_sum 0.0
+[13:12:16.877415] ---syncronized done ---
+[13:12:19.745568] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.6667 | reduced: 0.6667]
+[13:12:19.755431] Testing on dataset: columbia
+[13:12:21.269077] Test: [11]  [ 0/18]  eta: 0:00:27  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.5031  data: 1.3069  max mem: 1185
+[13:12:23.263782] Test: [11]  [17/18]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1943  data: 0.0727  max mem: 1185
+[13:12:23.436492] Test: [11] Total time: 0:00:03 (0.2040 s / it)
+[13:12:23.436663] ***************************************************************
+[13:12:23.436709] ****An extra tail dataset should exist for accracy metrics!****
+[13:12:23.436748] ***************************************************************
+[13:12:23.436792] **** Length of tail: 3 ****
+[13:12:23.560868] ====================
+[13:12:23.560936] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 3: The default batch size is 10
+[13:12:23.560952] ====================
+[13:12:23.561599] Actual Batchsize/ world_size {'_n': 1.5}
+[13:12:23.561672] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:12:23.562635] Test <remaining>: [11]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1249  data: 0.0636  max mem: 1185
+[13:12:23.562735] Test <remaining>: [11] Total time: 0:00:00 (0.1254 s / it)
+[13:12:23.564394] ---syncronized---
+[13:12:23.564432] image-level F1 reduced_count 2
+[13:12:23.564458] image-level F1 reduced_sum 1.4090019464492798
+[13:12:23.564483] pixel-level F1 reduced_count 363
+[13:12:23.564506] pixel-level F1 reduced_sum 0.0
+[13:12:23.564528] ---syncronized done ---
+[13:12:26.738137] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.7045 | reduced: 0.7045]
+[13:12:26.744792] Testing on dataset: uadfv
+[13:12:28.563534] Test: [11]  [ 0/39]  eta: 0:01:10  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.8112  data: 1.6905  max mem: 1185
+[13:12:30.920195] Test: [11]  [20/39]  eta: 0:00:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1178  data: 0.0002  max mem: 1185
+[13:12:33.002476] Test: [11]  [38/39]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1156  data: 0.0001  max mem: 1185
+[13:12:33.238195] Test: [11] Total time: 0:00:06 (0.1663 s / it)
+[13:12:33.238356] ***************************************************************
+[13:12:33.238398] ****An extra tail dataset should exist for accracy metrics!****
+[13:12:33.238432] ***************************************************************
+[13:12:33.238472] **** Length of tail: 4 ****
+[13:12:33.361620] ====================
+[13:12:33.361699] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 4: The default batch size is 10
+[13:12:33.361713] ====================
+[13:12:33.362265] Actual Batchsize/ world_size {'_n': 2.0}
+[13:12:33.362336] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:12:33.375303] Test <remaining>: [11]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1359  data: 0.0699  max mem: 1185
+[13:12:33.375391] Test <remaining>: [11] Total time: 0:00:00 (0.1364 s / it)
+[13:12:33.377017] ---syncronized---
+[13:12:33.377051] image-level F1 reduced_count 2
+[13:12:33.377072] image-level F1 reduced_sum 1.0979444980621338
+[13:12:33.377094] pixel-level F1 reduced_count 784
+[13:12:33.377112] pixel-level F1 reduced_sum 0.0
+[13:12:33.377131] ---syncronized done ---
+[13:12:35.871422] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.5490 | reduced: 0.5490]
+[13:12:35.879248] Testing on ckpt checkpoint-11.pth takes 0:04:33
+[13:12:35.879277] Loading checkpoint: checkpoint-12.pth
+[13:12:36.633428] Testing on dataset: coverage
+[13:12:37.933858] Test: [12]  [ 0/10]  eta: 0:00:12  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.2935  data: 1.1745  max mem: 1185
+[13:12:38.976002] Test: [12]  [ 9/10]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0002]  time: 0.2335  data: 0.1175  max mem: 1185
+[13:12:39.129899] Test: [12] Total time: 0:00:02 (0.2490 s / it)
+[13:12:39.133152] ---syncronized---
+[13:12:39.133235] image-level F1 reduced_count 2
+[13:12:39.133297] image-level F1 reduced_sum 1.3242321014404297
+[13:12:39.133355] pixel-level F1 reduced_count 200
+[13:12:39.133404] pixel-level F1 reduced_sum 0.021435648202896118
+[13:12:39.133457] ---syncronized done ---
+[13:12:42.025242] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0001]  image-level F1: [local: 0.6621 | reduced: 0.6621]
+[13:12:42.035106] Testing on dataset: columbia
+[13:12:43.588551] Test: [12]  [ 0/18]  eta: 0:00:27  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.5443  data: 1.3571  max mem: 1185
+[13:12:45.659731] Test: [12]  [17/18]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.2008  data: 0.0803  max mem: 1185
+[13:12:45.851595] Test: [12] Total time: 0:00:03 (0.2116 s / it)
+[13:12:45.851696] ***************************************************************
+[13:12:45.851712] ****An extra tail dataset should exist for accracy metrics!****
+[13:12:45.851725] ***************************************************************
+[13:12:45.851741] **** Length of tail: 3 ****
+[13:12:45.964447] ====================
+[13:12:45.964511] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 3: The default batch size is 10
+[13:12:45.964526] ====================
+[13:12:45.965034] Actual Batchsize/ world_size {'_n': 1.5}
+[13:12:45.965101] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:12:45.965962] Test <remaining>: [12]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1136  data: 0.0608  max mem: 1185
+[13:12:45.966056] Test <remaining>: [12] Total time: 0:00:00 (0.1141 s / it)
+[13:12:45.967398] ---syncronized---
+[13:12:45.967432] image-level F1 reduced_count 2
+[13:12:45.967456] image-level F1 reduced_sum 1.3963037729263306
+[13:12:45.967479] pixel-level F1 reduced_count 363
+[13:12:45.967500] pixel-level F1 reduced_sum 0.0
+[13:12:45.967520] ---syncronized done ---
+[13:12:49.062274] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.6982 | reduced: 0.6982]
+[13:12:49.066217] Testing on dataset: uadfv
+[13:12:50.815726] Test: [12]  [ 0/39]  eta: 0:01:07  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.7422  data: 1.5951  max mem: 1185
+[13:12:53.201783] Test: [12]  [20/39]  eta: 0:00:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1192  data: 0.0002  max mem: 1185
+[13:12:55.285127] Test: [12]  [38/39]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1157  data: 0.0001  max mem: 1185
+[13:12:55.500468] Test: [12] Total time: 0:00:06 (0.1648 s / it)
+[13:12:55.500619] ***************************************************************
+[13:12:55.500647] ****An extra tail dataset should exist for accracy metrics!****
+[13:12:55.500679] ***************************************************************
+[13:12:55.500703] **** Length of tail: 4 ****
+[13:12:55.627564] ====================
+[13:12:55.627628] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 4: The default batch size is 10
+[13:12:55.627642] ====================
+[13:12:55.628218] Actual Batchsize/ world_size {'_n': 2.0}
+[13:12:55.628286] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:12:55.641661] Test <remaining>: [12]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1401  data: 0.0735  max mem: 1185
+[13:12:55.641756] Test <remaining>: [12] Total time: 0:00:00 (0.1406 s / it)
+[13:12:55.643771] ---syncronized---
+[13:12:55.643803] image-level F1 reduced_count 2
+[13:12:55.643824] image-level F1 reduced_sum 0.9247311949729919
+[13:12:55.643847] pixel-level F1 reduced_count 784
+[13:12:55.643865] pixel-level F1 reduced_sum 0.0
+[13:12:55.643884] ---syncronized done ---
+[13:12:58.077223] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.4624 | reduced: 0.4624]
+[13:12:58.082903] Testing on ckpt checkpoint-12.pth takes 0:04:55
+[13:12:58.082929] Loading checkpoint: checkpoint-13.pth
+[13:12:58.845107] Testing on dataset: coverage
+[13:13:00.299372] Test: [13]  [ 0/10]  eta: 0:00:14  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.4472  data: 1.3105  max mem: 1185
+[13:13:01.340479] Test: [13]  [ 9/10]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.2488  data: 0.1311  max mem: 1185
+[13:13:01.529161] Test: [13] Total time: 0:00:02 (0.2677 s / it)
+[13:13:01.530887] ---syncronized---
+[13:13:01.530925] image-level F1 reduced_count 2
+[13:13:01.530949] image-level F1 reduced_sum 1.3288590908050537
+[13:13:01.530972] pixel-level F1 reduced_count 200
+[13:13:01.530990] pixel-level F1 reduced_sum 0.0
+[13:13:01.531009] ---syncronized done ---
+[13:13:04.461284] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.6644 | reduced: 0.6644]
+[13:13:04.470060] Testing on dataset: columbia
+[13:13:06.158566] Test: [13]  [ 0/18]  eta: 0:00:30  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 1.6773  data: 1.5283  max mem: 1185
+[13:13:08.130118] Test: [13]  [17/18]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.2027  data: 0.0850  max mem: 1185
+[13:13:08.334927] Test: [13] Total time: 0:00:03 (0.2141 s / it)
+[13:13:08.335092] ***************************************************************
+[13:13:08.335132] ****An extra tail dataset should exist for accracy metrics!****
+[13:13:08.335165] ***************************************************************
+[13:13:08.335201] **** Length of tail: 3 ****
+[13:13:08.450380] ====================
+[13:13:08.450445] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 3: The default batch size is 10
+[13:13:08.450459] ====================
+[13:13:08.450975] Actual Batchsize/ world_size {'_n': 1.5}
+[13:13:08.451037] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:13:08.451936] Test <remaining>: [13]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1158  data: 0.0623  max mem: 1185
+[13:13:08.452027] Test <remaining>: [13] Total time: 0:00:00 (0.1163 s / it)
+[13:13:08.453445] ---syncronized---
+[13:13:08.453478] image-level F1 reduced_count 2
+[13:13:08.453500] image-level F1 reduced_sum 1.3926498889923096
+[13:13:08.453522] pixel-level F1 reduced_count 363
+[13:13:08.453541] pixel-level F1 reduced_sum 0.0
+[13:13:08.453559] ---syncronized done ---
+[13:13:11.578167] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.6963 | reduced: 0.6963]
+[13:13:11.585137] Testing on dataset: uadfv
+[13:13:13.618014] Test: [13]  [ 0/39]  eta: 0:01:18  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 2.0236  data: 1.9052  max mem: 1185
+[13:13:15.956990] Test: [13]  [20/39]  eta: 0:00:03  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1169  data: 0.0001  max mem: 1185
+[13:13:18.040350] Test: [13]  [38/39]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1157  data: 0.0001  max mem: 1185
+[13:13:18.261313] Test: [13] Total time: 0:00:06 (0.1710 s / it)
+[13:13:18.261433] ***************************************************************
+[13:13:18.261457] ****An extra tail dataset should exist for accracy metrics!****
+[13:13:18.261476] ***************************************************************
+[13:13:18.261498] **** Length of tail: 4 ****
+[13:13:18.383531] ====================
+[13:13:18.383614] A batch that is not fully loaded was detected at the end of the dataset. The actual batch size for this batch is 4: The default batch size is 10
+[13:13:18.383628] ====================
+[13:13:18.384197] Actual Batchsize/ world_size {'_n': 2.0}
+[13:13:18.384267] {'pixel-level F1': tensor(0., device='cuda:0')}
+[13:13:18.397066] Test <remaining>: [13]  [0/1]  eta: 0:00:00  pixel-level F1: [local: 0.0000 | reduced: 0.0000]  time: 0.1348  data: 0.0681  max mem: 1185
+[13:13:18.397158] Test <remaining>: [13] Total time: 0:00:00 (0.1353 s / it)
+[13:13:18.398651] ---syncronized---
+[13:13:18.398685] image-level F1 reduced_count 2
+[13:13:18.398706] image-level F1 reduced_sum 0.9692100882530212
+[13:13:18.398729] pixel-level F1 reduced_count 784
+[13:13:18.398748] pixel-level F1 reduced_sum 0.0
+[13:13:18.398766] ---syncronized done ---
+[13:13:20.869115] Averaged stats: pixel-level F1: [local: 0.0000 | reduced: 0.0000]  image-level F1: [local: 0.4846 | reduced: 0.4846]
+[13:13:20.876406] Testing on ckpt checkpoint-13.pth takes 0:05:18
+[13:13:20.876441] Total testing time 0:05:18

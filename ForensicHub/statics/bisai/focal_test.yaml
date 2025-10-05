@@ -1,0 +1,53 @@
+checkpoint_path: /data/disk2/yer/ForensicHub/ForensicHub/statics/log/bisai1
+device: cuda
+dist_on_itp: false
+dist_url: env://
+evaluator:
+- name: ImageF1
+- init_config:
+    threshold: 0.5
+  name: PixelF1
+flag: test
+gpus: 0,1
+if_predict_label: true
+if_predict_mask: true
+log_dir: ./log/bisai1
+model:
+  name: focal
+no_model_eval: false
+num_workers: 12
+pin_mem: true
+resume: ""
+test_batch_size: 10
+
+test_dataset:
+- dataset_name: coverage
+  init_config:
+    image_size: 512
+    include_original: true
+    mask_type: forged
+    root_dir: /data/disk2/yer/Dataset/forgery/Coverage
+  name: CoverageDataset
+
+- dataset_name: columbia
+  init_config:
+    image_size: 512
+    include_original: true
+    root_dir: /data/disk2/yer/Dataset/forgery/Columbia
+  name: ColumbiaDataset
+
+- dataset_name: uadfv
+  init_config:
+    bbox_expand: 1.3
+    crop_by_landmarks: true
+    frames_per_video: 8
+    image_size: 512
+    include_fake: true
+    include_real: true
+    root_dir: /data/disk2/yer/Dataset/forgery/UADFV/UADFVset
+    sampling: uniform
+  name: UADFVDataset
+transform:
+  init_config:
+    norm_type: image_net
+  name: BisaiTransform
