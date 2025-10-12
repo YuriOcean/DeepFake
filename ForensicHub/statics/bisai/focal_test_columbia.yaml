@@ -1,4 +1,4 @@
-accum_iter: 1
+accum_iter: 2
 batch_size: 16
 blr: 0.001
 checkpoint_path: ./log/columbia

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yaml_config="/data/disk2/yer/ForensicHub/ForensicHub/statics/bisai/focal_train_columbia.yaml"
+yaml_config="/data/disk2/yer/ForensicHub/ForensicHub/statics/bisai/focal_test_coverage.yaml"
 
 # 从 yaml 中读取 gpus、log_dir 和 flag
 gpus=$(python -c "import yaml; print(yaml.safe_load(open('$yaml_config'))['gpus'])")

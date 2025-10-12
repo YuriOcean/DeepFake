@@ -1,69 +1,58 @@
-accum_iter: 1
-batch_size: 8
+accum_iter: 2
+batch_size: 16
 blr: 0.001
-checkpoint_path: ./log/bisai_coverage
+checkpoint_path: ./log/coverage
 device: cuda
 dist_on_itp: false
 dist_url: env://
 epochs: 100
-
 evaluator:
-  - name: ImageF1
-  - init_config:
-      threshold: 0.5
-    name: PixelF1
-
+- name: ImageF1
+- init_config:
+    threshold: 0.5
+  name: PixelF1
 find_unused_parameters: true
 flag: train
 gpus: 0,1
 if_predict_label: true
 if_predict_mask: true
 local_rank: -1
-log_dir: ./log/bisai_coverage
-
+log_dir: ./log/coverage
 log_per_epoch_count: 10
+loss:
+  seg_weight: 1.0
 lr: 1e-4
 min_lr: 1e-5
-
 model:
-  name: focal
   init_config: {}
-
-
+  name: focal
 no_model_eval: false
 num_workers: 8
 pin_mem: true
 record_epoch: 1
-test_period: 1000
 resume: ""
 seed: 42
 start_epoch: 0
 test_batch_size: 8
-
+test_dataset:
+- dataset_name: coverage
+  init_config:
+    image_size: 512
+    mask_dir_name: mask
+    root_dir: /data/disk2/yer/Dataset/forgery/Coverage
+  name: CoverageDataset
+test_period: 1000
 train_dataset:
   dataset_name: coverage
   init_config:
     image_size: 512
+    mask_dir_name: mask
     root_dir: /data/disk2/yer/Dataset/forgery/Coverage
-    mask_dir_name: mask   # 或 "masks"，根据你想用的文件夹
   name: CoverageDataset
-
-test_dataset:
-  - dataset_name: coverage
-    init_config:
-      image_size: 512
-      root_dir: /data/disk2/yer/Dataset/forgery/Coverage
-      mask_dir_name: mask
-    name: CoverageDataset
-
 transform:
   init_config:
     norm_type: image_net
-  name: BisaiTransform
-
+  name: FocalTransform
 use_amp: true
 warmup_epochs: 2
 weight_decay: 0.005
-
-loss:
-  seg_weight: 1.0
