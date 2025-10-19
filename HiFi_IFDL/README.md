@@ -4,20 +4,6 @@ This is the source code for our CVPR $2023$: "*Hierarchical Fine-Grained Image F
 
 Authors: [Xiao Guo](https://scholar.google.com/citations?user=Gkc-lAEAAAAJ&hl=en), [Xiaohong Liu](https://jhc.sjtu.edu.cn/~xiaohongliu/), [Zhiyuan Ren](https://scholar.google.com/citations?user=Z1ltuXEAAAAJ&hl=en), [Steven Grosz](https://scholar.google.com/citations?user=I1wOjTYUyYAC&hl=en), [Iacopo Masi](https://iacopomasi.github.io/), [Xiaoming Liu](http://cvlab.cse.msu.edu/)
 
-<p align="center">
-  <img src="https://github.com/CHELSEA234/HiFi_IFDL/blob/main/figures/overview_4.png" alt="drawing" width="1000"/>
-</p>
-
-### <a name="update"></a> Updates.
-- [Sep 2024] 👏 The International Journal of Computer Vision (**IJCV**) has accepted the extended version of HiFi-Net, stay tuned~
-- [Aug 2024] The HiFi-Net is integrated into the DeepFake-o-meter v2.0 platform, which is a user-friendly public detection tool designed by the **University at Buffalo**. [[DeepFake-o-meter v2.0]](https://zinc.cse.buffalo.edu/ubmdfl/deep-o-meter/home_login) [[ArXiv]](https://arxiv.org/pdf/2404.13146)
-- [Jul. 2024] 👏 **ECCV2024** "Deepfake Explainer" paper [[ArXiv]](https://arxiv.org/pdf/2402.00126) reports HiFi-Net's deep fake detection performance and the source code is released [[link]](https://github.com/CHELSEA234/HiFi_IFDL/edit/main/applications/deepfake_detection).
-- [Sep 2023] The first version dataset can be acquired via this link: [Dataset Link](https://drive.google.com/drive/folders/1fwBEmW30-e0ECpCNNG3nRU6I9OqJfMAn?usp=sharing)
-- [June 2023] The extended version of our work has been submitted to one of the ~~Machine Learning Journals~~ IJCV.
-- **This GitHub will keep updated, please stay tuned~**
-
-### Short 5 Min Video 
-[![Please Click the Figure](https://github.com/CHELSEA234/HiFi_IFDL/blob/main/figures/architecture.png)](https://www.youtube.com/watch?v=FwS3X5xcj8A&list=LL&index=5)
 
 ### Usage on Manipulation Localization (_e.g._, Columbia, Coverage, CASIA, NIST16 and IMD2020)
 - To create your environment by
